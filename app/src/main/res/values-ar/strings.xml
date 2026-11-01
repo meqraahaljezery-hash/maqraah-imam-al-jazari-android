@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مقرأة الإمام الجزري</string>
+    <string name="home_title">الرئيسية</string>
+    <string name="programs_title">البرامج</string>
+    <string name="registration_title">التسجيل</string>
+    <string name="payment_title">الباقات</string>
+    <string name="wallet_title">رصيدي</string>
+    <string name="admin_title">الإدارة</string>
+    <string name="support_title">الدعم</string>
+</resources>

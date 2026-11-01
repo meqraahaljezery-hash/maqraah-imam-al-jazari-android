@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">የአምላክ አል-ጃዛሪ መቀሌ</string>
+    <string name="home_title">መነሻ</string>
+    <string name="programs_title">ፕሮግራሞች</string>
+    <string name="registration_title">መመዝገብ</string>
+    <string name="payment_title">ጥቅሎች</string>
+    <string name="wallet_title">ቦርሳዬ</string>
+    <string name="admin_title">አስተዳደር</string>
+    <string name="support_title">ድጋፍ</string>
+</resources>
