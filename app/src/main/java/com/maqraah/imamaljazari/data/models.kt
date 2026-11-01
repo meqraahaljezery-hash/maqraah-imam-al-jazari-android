@@ -1,88 +1,58 @@
-package com.maqraah.imamaljazari.data
+package com.maqraah.imamaljazari.navigation
 
-import kotlinx.serialization.Serializable
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.maqraah.imamaljazari.ui.AppScaffold
+import com.maqraah.imamaljazari.ui.screens.AdminDashboardScreen
+import com.maqraah.imamaljazari.ui.screens.ChatScreen
+import com.maqraah.imamaljazari.ui.screens.GroupScreen
+import com.maqraah.imamaljazari.ui.screens.LoginScreen
+import com.maqraah.imamaljazari.ui.screens.PaymentScreen
+import com.maqraah.imamaljazari.ui.screens.ProgramDetailScreen
+import com.maqraah.imamaljazari.ui.screens.RegistrationScreen
+import com.maqraah.imamaljazari.ui.screens.SupportScreen
+import com.maqraah.imamaljazari.ui.screens.WalletScreen
 
-@Serializable
-data class Program(
-    val id: String,
-    val title: String,
-    val description: String,
-    val features: List<String>,
-    val conditions: String,
-    val duration: String,
-    val targetAudience: String,
-    val gender: String,
-    val isActive: Boolean = true,
-    val imageUrl: String? = null
-)
-
-@Serializable
-data class RegistrationRequest(
-    val id: String,
-    val fullName: String,
-    val birthDate: String,
-    val gender: String,
-    val country: String,
-    val city: String,
-    val phone: String,
-    val email: String? = null,
-    val programId: String,
-    val programTitle: String,
-    val preferredTime: String,
-    val readingLevel: String,
-    val previousMemorization: String,
-    val recitationType: String,
-    val availability: String,
-    val parentData: String = "",
-    val notes: String = "",
-    val status: String = "Pending"
-)
-
-@Serializable
-data class PaymentPackage(
-    val id: String,
-    val minutes: Int,
-    val priceEtb: Int,
-    val isActive: Boolean = true
-)
-
-@Serializable
-data class PaymentMethod(
-    val id: String,
-    val name: String,
-    val accountName: String,
-    val accountNumber: String,
-    val instructions: String
-)
-
-@Serializable
-data class WalletTransaction(
-    val id: String,
-    val type: String,
-    val amountMinutes: Int,
-    val previousBalance: Int,
-    val newBalance: Int,
-    val reason: String,
-    val createdAt: String,
-    val byUser: String = "System"
-)
-
-@Serializable
-data class AdminPermission(
-    val id: String,
-    val title: String,
-    val enabled: Boolean = false
-)
-
-@Serializable
-data class SupportContact(
-    val phone: String,
-    val email: String
-)
-
-@Serializable
-data class UserRole(
-    val id: String,
-    val name: String,
-    val description: String
-)
+@Composable
+fun AppNavGraph(
+    navController: NavHostController = rememberNavController()
+) {
+    NavHost(navController = navController, startDestination = AppRoute.Auth.route) {
+        composable(AppRoute.Auth.route) {
+            LoginScreen(navController)
+        }
+        composable(AppRoute.Home.route) {
+            AppScaffold(navController)
+        }
+        composable(AppRoute.Programs.route) {
+            AppScaffold(navController)
+        }
+        composable(AppRoute.ProgramDetail.route) {
+            ProgramDetailScreen(navController)
+        }
+        composable(AppRoute.Registration.route) {
+            RegistrationScreen(navController)
+        }
+        composable(AppRoute.Payment.route) {
+            PaymentScreen(navController)
+        }
+        composable(AppRoute.Wallet.route) {
+            WalletScreen(navController)
+        }
+        composable(AppRoute.Admin.route) {
+            AdminDashboardScreen(navController)
+        }
+        composable(AppRoute.Groups.route) {
+            GroupScreen(navController)
+        }
+        composable(AppRoute.Chat.route) {
+            ChatScreen(navController)
+        }
+        composable(AppRoute.Support.route) {
+            SupportScreen(navController)
+        }
+    }
+}

@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.maqraah.imamaljazari.data.Program
+import com.maqraah.imamaljazari.navigation.AppRoute
 
 @Composable
-fun ProgramsScreen(programs: List<Program>) {
+fun ProgramsScreen(navController: NavHostController, programs: List<Program>) {
     LazyColumn(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -55,7 +57,7 @@ fun ProgramsScreen(programs: List<Program>) {
                     Text(text = "الفئة المستهدفة: ${program.targetAudience}")
                     Text(text = "الشروط: ${program.conditions}")
                     Spacer(Modifier.height(12.dp))
-                    Button(onClick = { }) {
+                    Button(onClick = { navController.navigate(AppRoute.Registration.route) }) {
                         Text("التسجيل في هذا البرنامج")
                     }
                 }

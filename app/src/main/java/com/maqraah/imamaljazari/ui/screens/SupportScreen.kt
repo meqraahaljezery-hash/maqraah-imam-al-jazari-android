@@ -6,49 +6,52 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.maqraah.imamaljazari.data.SampleData
 
 @Composable
-fun AdminScreen() {
-    LazyColumn(
+fun ChatScreen(navController: NavHostController) {
+    var message by remember { mutableStateOf("") }
+    Column(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item {
-            Text("لوحة الإدارة", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        }
+        Text("مجموعة الدروس على Telegram", style = MaterialTheme.typography.headlineSmall)
+        Text("رابط Telegram: ${SampleData.groups.firstOrNull()?.telegramLink ?: "-"}")
 
-        item {
-            Card(shape = RoundedCornerShape(18.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)) {
-                Column(modifier = Modifier.padding(18.dp)) {
-                    Text("إحصاءات", color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
-                    Text("الطلاب: 245", color = MaterialTheme.colorScheme.onPrimary)
-                    Text("طلبات التسجيل: 14", color = MaterialTheme.colorScheme.onPrimary)
-                    Text("طلبات الدفع: 7", color = MaterialTheme.colorScheme.onPrimary)
-                }
-            }
-        }
-
-        items(SampleData.adminPermissions) { permission ->
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.padding(14.dp)) {
-                    Text(permission.title, fontWeight = FontWeight.Bold)
-                    Text(if (permission.enabled) "مفعلة" else "معطلة")
-                    Button(onClick = { }) {
-                        Text("تعديل الصلاحية")
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(SampleData.messages) { msg ->
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(modifier = Modifier.padding(12.dp)) {
+                        Text(msg.senderName, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                        Text(msg.content)
                     }
                 }
             }
         }
+
+        OutlinedTextField(
+            value = message,
+            onValueChange = { message = it },
+            label = { Text("اكتب رسالتك") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Button(onClick = { }) { Text("إرسال رسالة") }
     }
 }

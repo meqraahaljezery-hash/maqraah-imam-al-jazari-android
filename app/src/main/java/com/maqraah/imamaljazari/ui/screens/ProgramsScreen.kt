@@ -1,10 +1,7 @@
 package com.maqraah.imamaljazari.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.maqraah.imamaljazari.data.SampleData
+import com.maqraah.imamaljazari.navigation.AppRoute
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,7 +54,7 @@ fun HomeScreen() {
                         style = MaterialTheme.typography.bodyLarge
                     )
                     Button(
-                        onClick = { },
+                        onClick = { navController.navigate(AppRoute.Programs.route) },
                         modifier = Modifier.align(Alignment.End)
                     ) {
                         Text("البرامج المتاحة")
@@ -91,6 +90,12 @@ fun HomeScreen() {
                     Text(text = "المدة: ${program.duration}")
                     Text(text = "الفئة: ${program.targetAudience}")
                     Text(text = "الشروط: ${program.conditions}")
+                    Spacer(Modifier.height(12.dp))
+                    Button(
+                        onClick = { navController.navigate(AppRoute.ProgramDetail.route) }
+                    ) {
+                        Text("عرض التفاصيل")
+                    }
                 }
             }
         }

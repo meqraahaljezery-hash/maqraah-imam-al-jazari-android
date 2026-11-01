@@ -1,134 +1,170 @@
 package com.maqraah.imamaljazari.data
 
-object SampleData {
-    val programs = listOf(
-        Program(
-            id = "program_talqin",
-            title = "التلقين وتصحيح الأداء",
-            description = "برنامج عملي يركز على تثبيت الحفظ وتجويد الأداء الصوتي وتدارس الملاحظات بشكل مستمر.",
-            features = listOf("تلقين يومي", "تصحيح الأداء", "مراجعة مستمرة"),
-            conditions = "المستوى المتوسط فأعلى، حضور منتظم، إمكانية متابعة الصوت عبر المجموعة.",
-            duration = "8 أسابيع",
-            targetAudience = "الطلاب المبتدئون والمتوسطون",
-            gender = "مشترك",
-            isActive = true
-        ),
-        Program(
-            id = "program_hifz",
-            title = "الحفظ المكثف",
-            description = "دورة مكثفة للحفظ مع مراجعة يومية ومتابعة شخصية للطالب من قبل المعلم.",
-            features = listOf("خطة حفظ مبرمجة", "مراجعة يومية", "تقييم شهري"),
-            conditions = "قدرة على الالتزام بالحفظ اليومي، استيعاب جيد، وجود وقت كافٍ.",
-            duration = "12 أسبوعًا",
-            targetAudience = "الطلاب المستعدين للحفظ المكثف",
-            gender = "مشترك",
-            isActive = true
-        ),
-        Program(
-            id = "program_hafs",
-            title = "الإجازة برواية حفص",
-            description = "برنامج إجازة متقدم يركز على الرواية الصحيحة وتوثيق السند عبر الرواية المعتبرة.",
-            features = listOf("رواية حفص", "إجازة معتمدة", "تدقيق السند"),
-            conditions = "مستوى حفظ متقدم، القدرة على القراءة والتنقيط، الالتزام بالمتابعة.",
-            duration = "3 أشهر",
-            targetAudience = "الطلاب المتقدمون والمتدربون",
-            gender = "مشترك",
-            isActive = true
-        ),
-        Program(
-            id = "program_seven",
-            title = "الإجازة بالقراءات السبع",
-            description = "البرنامج المتقدم للإجازة في القراءات السبع مع متابعة شاملة في الأداء والسند.",
-            features = listOf("القراءات السبع", "إجازة منضبطة", "مراجعة سندية"),
-            conditions = "خبرة في القراءات، متابعة مستمرة، التزام بالتجويد.",
-            duration = "4 أشهر",
-            targetAudience = "الطلبة المتقدمون في القراءة",
-            gender = "مشترك",
-            isActive = true
-        )
-    )
+import kotlinx.serialization.Serializable
 
-    val paymentPackages = listOf(
-        PaymentPackage("pkg_100", 100, 500),
-        PaymentPackage("pkg_200", 200, 1000),
-        PaymentPackage("pkg_300", 300, 1470),
-        PaymentPackage("pkg_400", 400, 1920),
-        PaymentPackage("pkg_500", 500, 2350),
-        PaymentPackage("pkg_600", 600, 2760),
-        PaymentPackage("pkg_1000", 1000, 4500)
-    )
+@Serializable
+data class UserProfile(
+    val id: String = "",
+    val userId: String = "",
+    val fullName: String = "",
+    val phone: String = "",
+    val email: String? = null,
+    val country: String = "",
+    val city: String = "",
+    val gender: String = "",
+    val birthDate: String = "",
+    val status: String = "active",
+    val currentBalanceMinutes: Int = 0,
+    val role: String = "student",
+    val createdAt: String = ""
+)
 
-    val paymentMethods = listOf(
-        PaymentMethod(
-            id = "cbe",
-            name = "CBE",
-            accountName = "Imam Al-Jazari Center",
-            accountNumber = "1000000000",
-            instructions = "قم بتحويل المبلغ إلى الحساب المذكور ثم أرسل إثبات الدفع في النموذج التالي."
-        ),
-        PaymentMethod(
-            id = "boa",
-            name = "BOA",
-            accountName = "Imam Al-Jazari Center",
-            accountNumber = "2000000000",
-            instructions = "أدخل بياناتك الصحيحة، ثم أرسل صورة الإيصال أو رقم العملية في النموذج."
-        ),
-        PaymentMethod(
-            id = "telebirr",
-            name = "Telebirr",
-            accountName = "Imam Al-Jazari Center",
-            accountNumber = "+251900000000",
-            instructions = "قم بإرسال المبلغ من خلال رقم الهاتف المذكور ثم املأ تفاصيل الدفع."
-        ),
-        PaymentMethod(
-            id = "mpesa",
-            name = "M-Pesa",
-            accountName = "Imam Al-Jazari Center",
-            accountNumber = "+254700000000",
-            instructions = "قم بتحويل الرصيد إلى رقم الدفع المعلن ثم أرسل تفاصيل الإيصال."
-        )
-    )
+@Serializable
+data class Program(
+    val id: String = "",
+    val title: String = "",
+    val description: String = "",
+    val features: List<String> = emptyList(),
+    val conditions: String = "",
+    val duration: String = "",
+    val targetAudience: String = "",
+    val gender: String = "all",
+    val isActive: Boolean = true,
+    val imageUrl: String? = null,
+    val telegramLink: String? = null
+)
 
-    val walletTransactions = listOf(
-        WalletTransaction(
-            id = "txn_001",
-            type = "Recharge",
-            amountMinutes = 300,
-            previousBalance = 0,
-            newBalance = 300,
-            reason = "شحن أولي",
-            createdAt = "2026-10-01",
-            byUser = "Admin"
-        ),
-        WalletTransaction(
-            id = "txn_002",
-            type = "Usage",
-            amountMinutes = -40,
-            previousBalance = 300,
-            newBalance = 260,
-            reason = "جلسة تعليمية",
-            createdAt = "2026-10-08",
-            byUser = "System"
-        )
-    )
+@Serializable
+data class RegistrationRequest(
+    val id: String = "",
+    val userId: String = "",
+    val fullName: String = "",
+    val birthDate: String = "",
+    val gender: String = "",
+    val country: String = "",
+    val city: String = "",
+    val phone: String = "",
+    val email: String? = null,
+    val programId: String = "",
+    val programTitle: String = "",
+    val preferredTime: String = "",
+    val readingLevel: String = "",
+    val previousMemorization: String = "",
+    val recitationType: String = "",
+    val availability: String = "",
+    val parentData: String = "",
+    val notes: String = "",
+    val status: String = "Pending",
+    val rejectionReason: String? = null,
+    val createdAt: String = ""
+)
 
-    val adminPermissions = listOf(
-        AdminPermission("perm_registrations", "إدارة طلبات التسجيل", true),
-        AdminPermission("perm_payments", "إدارة طلبات الدفع", true),
-        AdminPermission("perm_programs", "إدارة البرامج", true),
-        AdminPermission("perm_groups", "إدارة المجموعات", false),
-        AdminPermission("perm_users", "إدارة المستخدمين", false)
-    )
+@Serializable
+data class PaymentPackage(
+    val id: String = "",
+    val minutes: Int = 0,
+    val priceEtb: Int = 0,
+    val isActive: Boolean = true
+)
 
-    val supportContact = SupportContact(
-        phone = "0990161372",
-        email = "kalidahd7@gmil.com"
-    )
+@Serializable
+data class PaymentMethod(
+    val id: String = "",
+    val name: String = "",
+    val accountName: String = "",
+    val accountNumber: String = "",
+    val instructions: String = ""
+)
 
-    val roles = listOf(
-        UserRole("role_admin", "المدير العام", "إدارة كاملة للنظام ومشرفي التطبيق."),
-        UserRole("role_supervisor", "المشرف", "إدارة الطلبات والمجالات المفوضة."),
-        UserRole("role_teacher", "المعلم", "متابعة الطلاب والبرامج."),
-        UserRole("role_student", "الطالب", "الالتزام بالبرامج والمجموعات والرصيد.")
-    )
-}
+@Serializable
+data class PaymentRequest(
+    val id: String = "",
+    val userId: String = "",
+    val packageId: String = "",
+    val senderName: String = "",
+    val senderPhone: String = "",
+    val paymentMethod: String = "",
+    val transactionNumber: String = "",
+    val amount: Int = 0,
+    val transferDate: String = "",
+    val receiptUrl: String? = null,
+    val status: String = "Pending",
+    val rejectionReason: String? = null,
+    val createdAt: String = ""
+)
+
+@Serializable
+data class WalletTransaction(
+    val id: String = "",
+    val userId: String = "",
+    val type: String = "",
+    val amountMinutes: Int = 0,
+    val previousBalance: Int = 0,
+    val newBalance: Int = 0,
+    val reason: String = "",
+    val createdAt: String = "",
+    val byUser: String = "System"
+)
+
+@Serializable
+data class AdminPermission(
+    val id: String = "",
+    val title: String = "",
+    val enabled: Boolean = false
+)
+
+@Serializable
+data class SupportContact(
+    val phone: String = "",
+    val email: String = "",
+    val telegram: String? = null
+)
+
+@Serializable
+data class UserRole(
+    val id: String = "",
+    val name: String = "",
+    val description: String = ""
+)
+
+@Serializable
+data class GroupChat(
+    val id: String = "",
+    val name: String = "",
+    val programId: String = "",
+    val gender: String = "",
+    val period: String = "",
+    val countryCode: String = "",
+    val telegramLink: String = "",
+    val isActive: Boolean = true
+)
+
+@Serializable
+data class ChatMessage(
+    val id: String = "",
+    val groupId: String = "",
+    val userId: String = "",
+    val senderName: String = "",
+    val content: String = "",
+    val createdAt: String = "",
+    val mediaUrl: String? = null
+)
+
+@Serializable
+data class AuditLog(
+    val id: String = "",
+    val action: String = "",
+    val actor: String = "",
+    val target: String = "",
+    val details: String = "",
+    val createdAt: String = ""
+)
+
+@Serializable
+data class NotificationItem(
+    val id: String = "",
+    val title: String = "",
+    val body: String = "",
+    val timestamp: String = "",
+    val read: Boolean = false
+)
